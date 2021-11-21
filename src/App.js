@@ -26,7 +26,7 @@ const App = () => {
 
     const interval = () => {
       const elapsedTime = Date.now() - startTime
-      setTimer((elapsedTime / 1000).toFixed(2))
+      setTimer(elapsedTime)
     }
 
     if (!feeding) {
@@ -45,7 +45,7 @@ const App = () => {
         const currentData = data
         const newData = [
           ...currentData,
-          { boob: boobNumber, startDateTime: startDate, time: timer },
+          { boob: boobNumber, startDateTime: startDate, time: timer / 1000 },
         ]
 
         setData(newData)
@@ -61,13 +61,17 @@ const App = () => {
     weekday: "short",
   }
 
-  const timeFormat = {
-    seconds: "long",
+  const deleteEntry = (startDateTimeToDelete) => {
+    const newData = data.filter(
+      (item) => item.startDateTime !== startDateTimeToDelete
+    )
+    setData(newData)
   }
 
   return (
     <div className="App">
-      <div className="timer">{timer}</div>
+      <div className="timer">{`${new Date(timer).getMinutes()}m 
+      ${new Date(timer).getSeconds()}s`}</div>
       <div className="bobs">
         <button
           onClick={() => clickOn(1)}
@@ -110,12 +114,19 @@ const App = () => {
             </div>
             <div className="dataItemDuration">{`${Math.floor(
               parseInt(item.time) / 60
-            )}:${
+            )}m ${
               Math.floor(parseInt(item.time)) -
               Math.floor(parseInt(item.time / 60)) * 60
             }s`}</div>
             <div className="dataItemBoob">
               {item.boob === 1 ? "L" : item.boob === 2 ? "R" : "Error"}
+            </div>
+            <div
+              className="deleteCross"
+              onClick={() => deleteEntry(item.startDateTime)}
+            >
+              <div className="arm"></div>
+              <div className="arm"></div>
             </div>
           </div>
         ))}

@@ -110,6 +110,39 @@
   background-color: white;
   border-radius: 3px;
   margin: 2px auto;
+  position: relative;
+}
+
+.deleteCross {
+  position: absolute;
+  right: -12px;
+  top: -12px;
+  background-color: red;
+  display: none;
+  height: 24px;
+  width: 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.deleteCross .arm {
+  position: absolute;
+  height: 4px;
+  width: 14px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.deleteCross .arm:first-of-type {
+  transform: rotate(45deg);
+}
+.deleteCross .arm:last-of-type {
+  transform: rotate(-45deg);
+}
+
+.dataItem:hover .deleteCross {
+  display: flex;
 }
 
 .dataItemDateTime {
