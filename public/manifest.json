@@ -1,6 +1,7 @@
 {
   "short_name": "Evie's Feeds",
   "name": "Nick's Wondertastic Breast Feeding Tracker",
+  "version": "0.1",
   "icons": [
     {
       "src": "favicon.png",
