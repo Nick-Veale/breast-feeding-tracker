@@ -104,32 +104,34 @@ const App = () => {
           <div className="dataItemDuration">DURATION</div>
           <div className="dataItemBoob">BOOB</div>
         </div>
-        {data.map((item) => (
-          <div className="dataItem" key={item.startDateTime}>
-            <div className="dataItemDateTime">
-              {new Date(parseInt(item.startDateTime)).toLocaleTimeString(
-                "en-US",
-                dateFormat
-              )}
+        {data
+          .map((item) => (
+            <div className="dataItem" key={item.startDateTime}>
+              <div className="dataItemDateTime">
+                {new Date(parseInt(item.startDateTime)).toLocaleTimeString(
+                  "en-US",
+                  dateFormat
+                )}
+              </div>
+              <div className="dataItemDuration">{`${Math.floor(
+                parseInt(item.time) / 60
+              )}m ${
+                Math.floor(parseInt(item.time)) -
+                Math.floor(parseInt(item.time / 60)) * 60
+              }s`}</div>
+              <div className="dataItemBoob">
+                {item.boob === 1 ? "L" : item.boob === 2 ? "R" : "Error"}
+              </div>
+              <div
+                className="deleteCross"
+                onClick={() => deleteEntry(item.startDateTime)}
+              >
+                <div className="arm"></div>
+                <div className="arm"></div>
+              </div>
             </div>
-            <div className="dataItemDuration">{`${Math.floor(
-              parseInt(item.time) / 60
-            )}m ${
-              Math.floor(parseInt(item.time)) -
-              Math.floor(parseInt(item.time / 60)) * 60
-            }s`}</div>
-            <div className="dataItemBoob">
-              {item.boob === 1 ? "L" : item.boob === 2 ? "R" : "Error"}
-            </div>
-            <div
-              className="deleteCross"
-              onClick={() => deleteEntry(item.startDateTime)}
-            >
-              <div className="arm"></div>
-              <div className="arm"></div>
-            </div>
-          </div>
-        ))}
+          ))
+          .reverse()}
       </div>
     </div>
   )
